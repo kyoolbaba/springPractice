@@ -1,11 +1,14 @@
 package com.springcore.core;
 
-import com.springcore.core.compute.Addition;
 import com.springcore.core.compute.Compute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CalculateNumbersImpl {
+    @Autowired
     private Compute computeNumber;
-
+    @Autowired
     public CalculateNumbersImpl(Compute computeNumber) {
         this.computeNumber = computeNumber;
     }

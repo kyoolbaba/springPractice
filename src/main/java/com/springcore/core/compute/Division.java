@@ -1,6 +1,7 @@
 package com.springcore.core.compute;
 
-import com.springcore.core.compute.Compute;
+import org.springframework.stereotype.Component;
+
 
 public class Division implements Compute {
     public int compute(int firstNumber, int secondNumber) {
