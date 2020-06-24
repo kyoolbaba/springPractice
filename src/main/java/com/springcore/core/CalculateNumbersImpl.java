@@ -5,7 +5,7 @@ public class CalculateNumbersImpl {
     public int computeNumbers(int firstNumber ,int secondNumber){
 //        need to add or multiply or subtract or divide
         Addition addition= new Addition();
-        int result=addition.add(firstNumber,secondNumber);
+        int result=addition.compute(firstNumber,secondNumber);
         return result;
     }
 
