@@ -1,4 +1,4 @@
-package com.springcore.core;
+package com.springcore.core.compute;
 
 import com.springcore.core.compute.Compute;
 import org.springframework.beans.factory.annotation.Autowired;

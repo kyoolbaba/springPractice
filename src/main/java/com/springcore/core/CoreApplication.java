@@ -1,7 +1,9 @@
 package com.springcore.core;
 
-
-import com.springcore.core.compute.Multiplication;
+import com.springcore.core.compute.CalculateNumbersImpl;
+import com.springcore.core.user.UserDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,17 +11,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class CoreApplication {
 
+    private static Logger LOGGER= LoggerFactory.getLogger(CoreApplication.class);
+
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(CoreApplication.class, args);
         CalculateNumbersImpl calculateNumbers=applicationContext.getBean(CalculateNumbersImpl.class);
-        CalculateNumbersImpl calculateNumbers1=applicationContext.getBean(CalculateNumbersImpl.class);
-//        this kind of bean is called singleton bean
-//        When requested prototype bean new instance of bean is given
-        System.out.println(calculateNumbers);
-        System.out.println(calculateNumbers1);
+        UserDAO userDAO= applicationContext.getBean(UserDAO.class);
+        UserDAO userDAO1=applicationContext.getBean(UserDAO.class);
+        LOGGER.info("{}",userDAO);
+        LOGGER.info("{}",userDAO.getJdbcConnection());
+        LOGGER.info("{}",userDAO1);
+        LOGGER.info("{}",userDAO1.getJdbcConnection());
 
-        int result=calculateNumbers.computeNumbers(2,3);
-        System.out.println(result+" is the value");
     }
 
 }
