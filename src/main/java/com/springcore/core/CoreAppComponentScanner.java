@@ -13,10 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.springcore.components")
 public class CoreAppComponentScanner {
 
-    private static Logger LOGGER= LoggerFactory.getLogger(CoreApplication.class);
+    private static Logger LOGGER= LoggerFactory.getLogger(CoreAppComponentScanner.class);
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(CoreApplication.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(CoreAppComponentScanner.class, args);
         ComponentDAO componenetDao= applicationContext.getBean(ComponentDAO.class);
         LOGGER.info("{}",componenetDao);
 
