@@ -2,10 +2,16 @@ package com.springcore.core;
 
 import com.springcore.core.compute.Compute;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+//Scope annotation also can be written like (@Scope("prototype"))
+
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CalculateNumbersImpl {
     @Autowired
     @Qualifier("multiply")
