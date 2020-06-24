@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculateNumbersImpl {
     @Autowired
-    private Compute computeNumber;
+    private Compute multiplication;
 
 // Type 1 Constructor Injection
 //    public CalculateNumbersImpl(Compute computeNumber) {
@@ -20,11 +20,14 @@ public class CalculateNumbersImpl {
 //        this.computeNumber = computeNumber;
 //    }
 
-    // Type 3 Even though Constructor and setter are not used then also it is autowired
+//     Type 3 Even though Constructor and setter are not used then also it is autowired
+
+//    Type 4 If you give more than 1 bean an Components you will get an error so while autowiring
+//    if you define the instance as class name this type is called autowiring by Name
     public int computeNumbers(int firstNumber , int secondNumber){
 //        need to add or multiply or subtract or divide
-        int result=computeNumber.compute(firstNumber,secondNumber);
-        System.out.println(computeNumber);
+        int result=multiplication.compute(firstNumber,secondNumber);
+        System.out.println(multiplication);
         return result;
     }
 
