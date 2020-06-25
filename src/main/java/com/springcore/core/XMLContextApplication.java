@@ -6,9 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class XMLContextApplication {
+
 public static Logger LOGGER= LoggerFactory.getLogger(XMLContextApplication.class);
-
-
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext applicationContext= new

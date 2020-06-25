@@ -11,6 +11,7 @@ public class XMLComputeApplication {
     Logger LOGGER= LoggerFactory.getLogger(this.getClass());
     ClassPathXmlApplicationContext applicationContext=new
             ClassPathXmlApplicationContext("applicationContext.xml");
+
     public static void main(String[] args) {
         XMLComputeApplication xmlComputeApplication= new XMLComputeApplication();
         xmlComputeApplication.setterMethodInjection();
