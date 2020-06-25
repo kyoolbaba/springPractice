@@ -11,7 +11,9 @@ public class XMLConstructor_CalculateNumbersImpl {
 
     private XML_Compute compute;
 
-
+    public XMLConstructor_CalculateNumbersImpl(XML_Compute compute) {
+        this.compute = compute;
+    }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

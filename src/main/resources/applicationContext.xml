@@ -15,29 +15,45 @@
     </bean>
 <!--Using Beans for setter dependency injection and injecting Addition Object-->
     <bean id="addition" class="com.springcore.core.xml_Compute.Addition"/>
-    <bean id="addNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
+    <bean id="(SetterMethod)addNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
         <property name="compute" ref="addition" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Subrtaction Object-->
 
     <bean id="subtraction" class="com.springcore.core.xml_Compute.Subtraction"/>
-    <bean id="subtractNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
+    <bean id="(SetterMethod)subtractNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
         <property name="compute" ref="subtraction" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Multiplication Object-->
 
     <bean id="multiply" class="com.springcore.core.xml_Compute.Multiplication"/>
-    <bean id="multiplyNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
+    <bean id="(SetterMethod)multiplyNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
         <property name="compute" ref="multiply" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Division Object-->
 
     <bean id="divide" class="com.springcore.core.xml_Compute.Division"/>
-    <bean id="divideNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
+    <bean id="(SetterMethod)divideNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
         <property name="compute" ref="divide" />
+    </bean>
+
+    <bean id="(Constructor)addNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
+        <constructor-arg index="0" ref="addition"/>
+    </bean>
+
+    <bean id="(Constructor)SubtractNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
+        <constructor-arg index="0" ref="subtraction"/>
+    </bean>
+
+    <bean id="(Constructor)multiplynumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
+        <constructor-arg index="0" ref="multiply"/>
+    </bean>
+
+    <bean id="(Constructor)divideNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
+        <constructor-arg index="0" ref="divide"/>
     </bean>
 
     <context:component-scan base-package="com.springcore"/>
