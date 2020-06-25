@@ -1,5 +1,6 @@
 package com.springcore.core;
 
+import com.springcore.components.ComponentDAO;
 import com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl;
 import com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl;
 import org.slf4j.Logger;
@@ -14,6 +15,11 @@ public class XMLComputeApplication {
         XMLComputeApplication xmlComputeApplication= new XMLComputeApplication();
         xmlComputeApplication.setterMethodInjection();
         xmlComputeApplication.constructorDependencyInjection();
+        xmlComputeApplication.componentScan();
+        xmlComputeApplication.singletonCheck();
+        xmlComputeApplication.beanPrototypeAndDependencySingleton();
+        xmlComputeApplication.beanAndDependencyArePrototype();
+        xmlComputeApplication.beanIsSingletonAndDependencyIsPrototype();
     }
 
     public void setterMethodInjection(){
@@ -66,6 +72,54 @@ public class XMLComputeApplication {
         LOGGER.info("{}",constructorForDivision);
     }
 
+    private void componentScan() {
+        ComponentDAO componentDAO=applicationContext.getBean("ComponentDAO",ComponentDAO.class);
+        LOGGER.info("{}" ,componentDAO);
+        LOGGER.info("{}",componentDAO.getComponentJdbcConnection());
+    }
 
+    private void singletonCheck() {
+        System.out.println("SINGLETON SCOPE");
+        ComponentDAO componentDAO1=applicationContext.getBean("ComponentDAO",ComponentDAO.class);
+        ComponentDAO componentDAO2=applicationContext.getBean("ComponentDAO",ComponentDAO.class);
+        System.out.println(componentDAO1);
+        System.out.println(componentDAO1.getComponentJdbcConnection());
+        System.out.println(componentDAO2);
+        System.out.println(componentDAO2.getComponentJdbcConnection());
+//        LOGGER.info("{}" ,componentDAO1);
+//        LOGGER.info("{}",componentDAO1.getComponentJdbcConnection());
+//        LOGGER.info("{}" ,componentDAO2);
+//        LOGGER.info("{}",componentDAO2.getComponentJdbcConnection());
+    }
+
+    private void beanPrototypeAndDependencySingleton() {
+        System.out.println("PROTOTYPE SCOPE");
+        ComponentDAO componentDAO1=applicationContext.getBean("ComponentDAOPrototype",ComponentDAO.class);
+        ComponentDAO componentDAO2=applicationContext.getBean("ComponentDAOPrototype",ComponentDAO.class);
+        System.out.println(componentDAO1);
+        System.out.println(componentDAO1.getComponentJdbcConnection());
+        System.out.println(componentDAO2);
+        System.out.println(componentDAO2.getComponentJdbcConnection());
+    }
+
+    private void beanAndDependencyArePrototype() {
+        System.out.println("BOTH BEANS ARE PROTOTYPE SCOPE");
+        ComponentDAO componentDAO1=applicationContext.getBean("ComponentDaoAndJDBCArePrototype",ComponentDAO.class);
+        ComponentDAO componentDAO2=applicationContext.getBean("ComponentDaoAndJDBCArePrototype",ComponentDAO.class);
+        System.out.println(componentDAO1);
+        System.out.println(componentDAO1.getComponentJdbcConnection());
+        System.out.println(componentDAO2);
+        System.out.println(componentDAO2.getComponentJdbcConnection());
+    }
+
+    private void beanIsSingletonAndDependencyIsPrototype(){
+        System.out.println("BEAN IS SINGLETON AND DEPENDENCY IS PROTOTYPE");
+        ComponentDAO componentDAO1=applicationContext.getBean("ComponentDaoSingleAndJDBCPrototype",ComponentDAO.class);
+        ComponentDAO componentDAO2=applicationContext.getBean("ComponentDaoSingleAndJDBCPrototype",ComponentDAO.class);
+        System.out.println(componentDAO1);
+        System.out.println(componentDAO1.getComponentJdbcConnection());
+        System.out.println(componentDAO2);
+        System.out.println(componentDAO2.getComponentJdbcConnection());
+    }
 
 }

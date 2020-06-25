@@ -40,23 +40,62 @@
         <property name="compute" ref="divide" />
     </bean>
 
+    <!--Using Beans for Constructor dependency injection and injecting Addition Object-->
+
+
     <bean id="(Constructor)addNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
         <constructor-arg index="0" ref="addition"/>
     </bean>
+
+    <!--Using Beans for Constructor dependency injection and injecting Subraction Object-->
 
     <bean id="(Constructor)SubtractNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
         <constructor-arg index="0" ref="subtraction"/>
     </bean>
 
+    <!--Using Beans for Constructor dependency injection and injecting Mulitplication Object-->
+
     <bean id="(Constructor)multiplynumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
         <constructor-arg index="0" ref="multiply"/>
     </bean>
+
+    <!--Using Beans for Constructor dependency injection and injecting Division Object-->
 
     <bean id="(Constructor)divideNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
         <constructor-arg index="0" ref="divide"/>
     </bean>
 
-    <context:component-scan base-package="com.springcore"/>
+<!--    Try to inject dependency of unreachable package-->
+
+
+    <bean id="ComponentjdbcConnection" class="com.springcore.components.ComponentJdbcConnection"/>
+    <bean id="ComponentDAO" class="com.springcore.components.ComponentDAO">
+        <property name="componentJdbcConnection" ref="ComponentjdbcConnection"/>
+    </bean>
+
+<!--    BEAN IS PROTOTYPE AND DEPENDENCY  IS SINGLETON-->
+
+    <bean id="ComponentDAOPrototype" class="com.springcore.components.ComponentDAO" scope="prototype" >
+        <property name="componentJdbcConnection" ref="ComponentjdbcConnection"  />
+    </bean>
+
+<!--    Both bean and dependency is prototype-->
+
+    <bean id="PrototypeComponentjdbcConnection"
+          class="com.springcore.components.ComponentJdbcConnection" scope="prototype" />
+    <bean id="ComponentDaoAndJDBCArePrototype" class="com.springcore.components.ComponentDAO" scope="prototype">
+        <property name="componentJdbcConnection" ref="PrototypeComponentjdbcConnection"/>
+    </bean>
+
+<!--    BEAN IS SINGLETON AND DEPENDENCY IS PROTOTYPE-->
+
+    <bean id="PrototypeComponentjdbcConnection"
+          class="com.springcore.components.ComponentJdbcConnection" scope="prototype" />
+    <bean id="ComponentDaoSingleAndJDBCPrototype" class="com.springcore.components.ComponentDAO" scope="singleton">
+        <property name="componentJdbcConnection" ref="PrototypeComponentjdbcConnection"/>
+    </bean>
+
+    <context:component-scan base-package="com.springcore.core"/>
 
 
 </beans>
