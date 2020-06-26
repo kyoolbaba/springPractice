@@ -9,18 +9,18 @@ import javax.annotation.PreDestroy;
 
 public class XMLSetter_CalculateNumbersImpl {
 
-    private XML_Compute compute;
+    private XML_Compute division;
 
-    public void setCompute(XML_Compute compute) {
-        this.compute = compute;
+    public void setDivision(XML_Compute division) {
+        this.division = division;
     }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public int computeNumbers(int firstNumber, int secondNumber) {
 //        need to add or multiply or subtract or divide
-        int result = compute.compute(firstNumber, secondNumber);
-        System.out.println(compute);
+        int result = division.compute(firstNumber, secondNumber);
+        System.out.println(division);
         return result;
     }
 

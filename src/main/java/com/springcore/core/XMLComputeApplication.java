@@ -1,6 +1,7 @@
 package com.springcore.core;
 
 import com.springcore.components.ComponentDAO;
+import com.springcore.core.javaconfig.Employee;
 import com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl;
 import com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl;
 import org.slf4j.Logger;
@@ -21,6 +22,13 @@ public class XMLComputeApplication {
         xmlComputeApplication.beanPrototypeAndDependencySingleton();
         xmlComputeApplication.beanAndDependencyArePrototype();
         xmlComputeApplication.beanIsSingletonAndDependencyIsPrototype();
+        xmlComputeApplication.loadEmployee();
+    }
+
+    private void loadEmployee() {
+        Employee employee=(Employee) applicationContext.getBean("employee1");
+        System.out.println(employee.getEmployeeId());
+        System.out.println(employee.getEmployeeName());
     }
 
     public void setterMethodInjection(){
@@ -37,17 +45,11 @@ public class XMLComputeApplication {
         System.out.println(setterMethodForSubtraction.computeNumbers(10,20));
         LOGGER.info("{}",setterMethodForSubtraction);
 
-        System.out.println("Multiplying Numbers");
-        XMLSetter_CalculateNumbersImpl setterMethodForMultiplication=applicationContext.
-                getBean("(SetterMethod)multiplyNumbers",XMLSetter_CalculateNumbersImpl.class);
-        System.out.println(setterMethodForMultiplication.computeNumbers(10,20));
-        LOGGER.info("{}",setterMethodForMultiplication);
+        XMLSetter_CalculateNumbersImpl autoWireByNameForDivision=
+                applicationContext.getBean("(AutowireByName)divideNumbers",XMLSetter_CalculateNumbersImpl.class);
+        System.out.println(autoWireByNameForDivision.computeNumbers(100,50));
+        LOGGER.info("{}",autoWireByNameForDivision);
 
-        System.out.println("Dividing Numbers");
-        XMLSetter_CalculateNumbersImpl setterMethodForDivision=applicationContext.
-                getBean("(SetterMethod)divideNumbers",XMLSetter_CalculateNumbersImpl.class);
-        System.out.println(setterMethodForDivision.computeNumbers(100,20));
-        LOGGER.info("{}",setterMethodForDivision);
     }
 
     public void constructorDependencyInjection(){
@@ -61,16 +63,6 @@ public class XMLComputeApplication {
                 applicationContext.getBean("(Constructor)SubtractNumbers",XMLConstructor_CalculateNumbersImpl.class);
         System.out.println(constructorForSubtraction.computeNumbers(10,50));
         LOGGER.info("{}",constructorForSubtraction);
-
-        XMLConstructor_CalculateNumbersImpl constructorForMultiplication=
-                applicationContext.getBean("(Constructor)multiplynumbers",XMLConstructor_CalculateNumbersImpl.class);
-        System.out.println(constructorForMultiplication.computeNumbers(10,50));
-        LOGGER.info("{}",constructorForMultiplication);
-
-        XMLConstructor_CalculateNumbersImpl constructorForDivision=
-                applicationContext.getBean("(Constructor)divideNumbers",XMLConstructor_CalculateNumbersImpl.class);
-        System.out.println(constructorForDivision.computeNumbers(100,50));
-        LOGGER.info("{}",constructorForDivision);
     }
 
     private void componentScan() {

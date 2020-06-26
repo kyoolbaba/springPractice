@@ -17,28 +17,28 @@
 <!--Using Beans for setter dependency injection and injecting Addition Object-->
     <bean id="addition" class="com.springcore.core.xml_Compute.Addition"/>
     <bean id="(SetterMethod)addNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
-        <property name="compute" ref="addition" />
+        <property name="division" ref="addition" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Subrtaction Object-->
 
     <bean id="subtraction" class="com.springcore.core.xml_Compute.Subtraction"/>
     <bean id="(SetterMethod)subtractNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
-        <property name="compute" ref="subtraction" />
+        <property name="division" ref="subtraction" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Multiplication Object-->
 
     <bean id="multiply" class="com.springcore.core.xml_Compute.Multiplication"/>
     <bean id="(SetterMethod)multiplyNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
-        <property name="compute" ref="multiply" />
+        <property name="division" ref="multiply" />
     </bean>
 
     <!--Using Beans for setter dependency injection and injecting Division Object-->
 
-    <bean id="divide" class="com.springcore.core.xml_Compute.Division"/>
+    <bean id="divide" class="com.springcore.core.xml_Compute.Division" autowire="byName"/>
     <bean id="(SetterMethod)divideNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
-        <property name="compute" ref="divide" />
+        <property name="division" ref="divide" />
     </bean>
 
     <!--Using Beans for Constructor dependency injection and injecting Addition Object-->
@@ -54,16 +54,12 @@
         <constructor-arg index="0" ref="subtraction"/>
     </bean>
 
-    <!--Using Beans for Constructor dependency injection and injecting Mulitplication Object-->
 
-    <bean id="(Constructor)multiplynumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
-        <constructor-arg index="0" ref="multiply"/>
-    </bean>
 
-    <!--Using Beans for Constructor dependency injection and injecting Division Object-->
+    <!--Using Beans for Dependency injection  autowire by name-->
 
-    <bean id="(Constructor)divideNumbers" class="com.springcore.core.xml_Compute.XMLConstructor_CalculateNumbersImpl">
-        <constructor-arg index="0" ref="divide"/>
+    <bean id="(AutowireByName)divideNumbers" class="com.springcore.core.xml_Compute.XMLSetter_CalculateNumbersImpl">
+        <property name="division" ref="divide"/>
     </bean>
 
 <!--    Try to inject dependency of unreachable package-->
@@ -86,6 +82,7 @@
           class="com.springcore.components.ComponentJdbcConnection" scope="prototype" />
     <bean id="ComponentDaoAndJDBCArePrototype" class="com.springcore.components.ComponentDAO" scope="prototype">
         <property name="componentJdbcConnection" ref="PrototypeComponentjdbcConnection"/>
+
     </bean>
 
 <!--    BEAN IS SINGLETON AND DEPENDENCY IS PROTOTYPE-->
@@ -94,9 +91,22 @@
           class="com.springcore.components.ComponentJdbcConnection" scope="prototype">
         <aop:scoped-proxy proxy-target-class="true"/>
     </bean>
+
     <bean id="ComponentDaoSingleAndJDBCPrototype" class="com.springcore.components.ComponentDAO" scope="singleton">
         <property name="componentJdbcConnection" ref="PrototypeComponentjdbcConnectionProxyEnabled"/>
     </bean>
+
+    <bean id="employee" class="com.springcore.core.javaconfig.Employee">
+        <property name="employeeId" value="1111"/>
+        <property name="employeeName" value="Milan"/>
+    </bean>
+
+    <bean id="employee1" class="com.springcore.core.javaconfig.Employee">
+        <property name="employeeId" value="2222"/>
+        <property name="employeeName" value="Rahul"/>
+    </bean>
+
+    <bean id="employeeDao" class="com.springcore.core.javaconfig.EmployeeDAO" autowire="byType"/>
 
     <context:component-scan base-package="com.springcore.core"/>
 

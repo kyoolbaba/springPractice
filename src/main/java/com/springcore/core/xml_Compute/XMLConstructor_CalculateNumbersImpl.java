@@ -9,18 +9,22 @@ import javax.annotation.PreDestroy;
 
 public class XMLConstructor_CalculateNumbersImpl {
 
-    private XML_Compute compute;
+    private XML_Compute multiplication;
 
-    public XMLConstructor_CalculateNumbersImpl(XML_Compute compute) {
-        this.compute = compute;
+    public XMLConstructor_CalculateNumbersImpl(XML_Compute multiplication) {
+        this.multiplication = multiplication;
+    }
+
+    public void setMultiplication(XML_Compute multiplication) {
+        this.multiplication = multiplication;
     }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public int computeNumbers(int firstNumber, int secondNumber) {
 //        need to add or multiply or subtract or divide
-        int result = compute.compute(firstNumber, secondNumber);
-        System.out.println(compute);
+        int result = multiplication.compute(firstNumber, secondNumber);
+        System.out.println(multiplication);
         return result;
     }
 
